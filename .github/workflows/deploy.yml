@@ -22,4 +22,4 @@ jobs:
             ls
             cd DevOps
             git pull
-            pm2 restart devops-test
+            pm2 restart dev
