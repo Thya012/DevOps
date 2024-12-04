@@ -1,4 +1,4 @@
-name: Test API
+name: Deploy to VM
 on:
   push:
     branches: main
@@ -11,8 +11,15 @@ jobs:
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: localhost
+          host: 62.146.177.21
           username: root
-          password: admin
-          port: 2233
-          script: whoami
+          key: ${{ SSH_VPS_KEY }}
+          port: 22
+          script: |
+            . ~/.nvm/nvm.sh
+            whoami
+            pwd
+            ls
+            cd DevOps
+            git pull
+            pm2 restart devops-test
